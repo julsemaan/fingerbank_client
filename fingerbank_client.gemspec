@@ -7,16 +7,16 @@ require "fingerbank_client/version"
 Gem::Specification.new do |s|
   s.name        = "fingerbank_client"
   s.version     = FingerbankClient::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of FingerbankClient."
-  s.description = "TODO: Description of FingerbankClient."
+  s.authors     = ["Julien Semaan"]
+  s.email       = ["jul.semaan@gmail.com"]
+  s.homepage    = "https://fingerbank.org"
+  s.summary     = "Provides an interface to query Fingerbank with user agents."
+  s.description = "Add longer description."
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0.0"
 
-  s.add_development_dependency "sqlite3"
+  s.add_dependency "sqlite3"
 end
