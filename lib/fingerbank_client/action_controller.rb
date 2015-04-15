@@ -1,6 +1,6 @@
 require "action_controller/railtie"
 
-class FingerbankClient
+class FingerbankClient < Fingerbank
   module ActionController
     extend ActiveSupport::Concern
 
