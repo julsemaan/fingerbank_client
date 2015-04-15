@@ -8,7 +8,7 @@ class Browser
     end
 
     rake_tasks do
-      load "lib/tasks/fingerbank_client_tasks.rake"
+      load "tasks/fingerbank_client_tasks.rake"
     end
   end
 end
