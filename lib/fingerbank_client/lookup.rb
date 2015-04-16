@@ -15,13 +15,16 @@ class Fingerbank
     end
 
     def lookup(user_agent)
-      if defined?(Rails.cache)
+      begin
         Rails.cache.fetch(user_agent, :expires_in => 2.hour) do
           _lookup(user_agent)
         end
-      else
-        return _lookup(user_agent)
+      rescue NameError => e
+        unless e.message == "uninitialized constant RAILS_CACHE"
+          raise e
+        end
       end
+      return _lookup(user_agent)
     end
 
     def lookup_in_upstream(user_agent)
