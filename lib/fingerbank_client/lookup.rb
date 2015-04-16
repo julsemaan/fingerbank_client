@@ -7,8 +7,7 @@ class Fingerbank
         device = Device.lookup_in_local(user_agent)
         return device unless device.nil?
       rescue Exception => e
-        Fingerbank.logger.warn "Can't lookup device in local database"
-        Fingerbank.logger.error e.message
+        Fingerbank.logger.warn "Fingerbank : Can't lookup device in local database (#{e.message})"
       end
 
       device = lookup_in_upstream user_agent
