@@ -1,8 +1,9 @@
+require 'fingerbank_client/logger'
+
 begin
   require 'sqlite3'
 rescue LoadError => e
-  puts "Cannot load sqlite3 module. Local lookup WILL FAIL !"
-  puts e
+  Fingerbank.logger.warn "Cannot load sqlite3 module. Local lookup WILL FAIL ! (#{e.message})"
 end
 
 class Database
@@ -16,9 +17,8 @@ class Database
       stm = db.prepare statement
       rs = stm.execute(*args) 
     rescue SQLite3::Exception => e 
-      puts "Exception occurred while selecting in the database"
+      Fingerbank.logger.error "Exception occurred while selecting in the database (#{e.message})"
       self.close
-      puts e
       raise e
     end
   end

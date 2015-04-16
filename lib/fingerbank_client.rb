@@ -1,6 +1,7 @@
 require 'fingerbank_client/upstream'
 require 'fingerbank_client/lookup'
 require 'fingerbank_client/rails' if defined?(::Rails)
+require 'fingerbank_client/logger'
 
 class Fingerbank
   include Upstream
