@@ -17,7 +17,7 @@ class FingerbankClientTest < ActiveSupport::TestCase
     device = client.lookup("A/4.4.4/samsung/SAMSUNG-SGH-I337/MSM8960/AT&T")
     assert device
     assert_equal device.name, "Galaxy S4"
-    assert device.has_parent "Generic Android"
+    assert device.has_parent? "Generic Android"
   end
 
   test 'lookup device in upstream' do
@@ -25,6 +25,6 @@ class FingerbankClientTest < ActiveSupport::TestCase
     device = client.lookup("iphone")
     assert device
     assert_equal device.name, "Apple iPhone"
-    assert device.has_parent("Apple iPod, iPhone or iPad")
+    assert device.has_parent?("Apple iPod, iPhone or iPad")
   end
 end

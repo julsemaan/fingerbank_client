@@ -16,6 +16,7 @@ namespace :fingerbank do |ns|
   desc "Find out the information for a user agent"
   task :lookup, [:user_agent] do |t, args|
     device = FingerbankClient.new.lookup(args[:user_agent])
+    puts device.ios?
     puts device.inspect
   end
 end

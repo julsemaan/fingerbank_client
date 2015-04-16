@@ -1,8 +1,12 @@
 require 'fingerbank_client/database'
+require 'fingerbank_client/device_classes'
 
 class Device
+  include Classes
+
   attr_accessor :parents
   attr_accessor :name
+  attr_accessor :version
 
   def self.lookup_in_local(user_agent)
     db = Database.new
@@ -15,11 +19,12 @@ class Device
         return nil
       end
 
-      rs = db.query "SELECT device.id,device.name,device.parent_id FROM device join combination on device.id=combination.device_id where combination.user_agent_id=? order by score desc limit 1", user_agent_id
+      rs = db.query "SELECT device.id,device.name,device.parent_id,combination.version FROM device join combination on device.id=combination.device_id where combination.user_agent_id=? order by score desc limit 1", user_agent_id
       record = rs.first
       id = record[0]
       name = record[1]
       parent_id = record[2]
+      version = record[3]
       parents = []
 
       until(parent_id.nil?)
@@ -37,13 +42,13 @@ class Device
     self.parents = options[:parents]
   end
 
-  def has_parent(name)
+  def has_parent?(name)
     self.parents.include?(name)
   end
 
-  def is(name)
+  def is?(name)
     return true if name == self.name
-    return self.has_parent(name)
+    return self.has_parent?(name)
   end
 
 end
