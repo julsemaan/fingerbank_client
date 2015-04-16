@@ -2,7 +2,7 @@ require "rails/railtie"
 require "fingerbank_client/action_controller"
 require "fingerbank_client/middleware"
 
-class Browser
+class FingerbankClient < Fingerbank
   class Railtie < Rails::Railtie
     initializer "fingerbank" do
       ::ActionController::Base.send :include, FingerbankClient::ActionController
@@ -10,7 +10,6 @@ class Browser
 
     rake_tasks do
       load "tasks/fingerbank_client_tasks.rake"
-      FingerbankClient::Middleware::Context.send :include
     end
   end
 end
