@@ -22,7 +22,7 @@ class FingerbankClient < Fingerbank
         @device = fingerbank.lookup(request.headers["User-Agent"])
       rescue FingerbankError => e
         @device = nil
-        Fingerbank.logger.error "Couldn't lookup device. Exception is stored in fingerbank.last_error. Message is : #{e.message}"
+        Fingerbank.logger.error "Fingerbank : Couldn't lookup device. Exception is stored in fingerbank.last_error. Message is : #{e.message}"
         fingerbank.last_error = e
       end
       return @device
