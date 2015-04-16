@@ -1,6 +1,5 @@
 require "rails/railtie"
 require "fingerbank_client/action_controller"
-require "fingerbank_client/middleware"
 
 class FingerbankClient < Fingerbank
   class Railtie < Rails::Railtie
