@@ -9,6 +9,7 @@ class Browser
 
     rake_tasks do
       load "tasks/fingerbank_client_tasks.rake"
+      Browser::Middleware::Context.send :include
     end
   end
 end
