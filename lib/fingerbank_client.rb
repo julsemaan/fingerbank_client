@@ -7,9 +7,11 @@ class Fingerbank
   include Lookup
 
   attr_accessor :key
+  attr_accessor :last_error
 
   def initialize(options = {})
     self.key = options[:key]
+    self.last_error = nil
   end
 end
 

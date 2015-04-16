@@ -1,4 +1,5 @@
 require "action_controller/railtie"
+require "fingerbank_client/exception"
 
 class FingerbankClient < Fingerbank
   module ActionController
@@ -16,7 +17,15 @@ class FingerbankClient < Fingerbank
     end
 
     def current_device
-      fingerbank.lookup(request.headers["User-Agent"])
+      @device = nil
+      begin
+        @device = fingerbank.lookup(request.headers["User-Agent"])
+      rescue FingerbankError => e
+        @device = nil
+        fingerbank.last_error = e
+      end
+      return @device
     end
+
   end
 end

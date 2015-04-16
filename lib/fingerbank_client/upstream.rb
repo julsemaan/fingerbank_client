@@ -1,4 +1,5 @@
 require 'net/http'
+require 'fingerbank_client/exception'
 
 class Fingerbank
   module Upstream
@@ -8,7 +9,7 @@ class Fingerbank
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       resp = http.get("/api/v1/download?key=#{self.key}")
 
-      raise "Couldn't download database : #{resp.body}" if resp.code != '200'
+      raise FingerbankError.new("Communication error"), "Couldn't download databse : #{resp.body}" if resp.code != '200'
 
       file = File.new("fingerbank.sqlite", "w:ASCII-8BIT")
       file.write(resp.body)
@@ -28,7 +29,7 @@ class Fingerbank
       resp = http.get(url)
 
       return nil if resp.code == '404'
-      raise "Couldn't contact upstream : #{resp.body}" if resp.code != '200'
+      raise FingerbankError.new("Communication error"), "Couldn't contact upstream : #{resp.body}" if resp.code != '200'
 
       require 'json'
       data = JSON.parse(resp.body) 
