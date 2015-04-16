@@ -15,7 +15,7 @@ class Fingerbank
     end
 
     def lookup(user_agent)
-      if defined?(::Rails)
+      if defined?(Rails.cache)
         Rails.cache.fetch(user_agent, :expires_in => 2.hour) do
           _lookup(user_agent)
         end
