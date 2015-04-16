@@ -3,8 +3,13 @@ require 'fingerbank_client/device'
 class Fingerbank
   module Lookup
     def _lookup(user_agent)
-      device = Device.lookup_in_local(user_agent)
-      return device unless device.nil?
+      begin
+        device = Device.lookup_in_local(user_agent)
+        return device unless device.nil?
+      rescue Exception => e
+        puts "Can't lookup device in local database"
+        puts e
+      end
 
       device = lookup_in_upstream user_agent
       return device
