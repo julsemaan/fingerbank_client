@@ -1,5 +1,9 @@
-
-require 'sqlite3'
+begin
+  require 'sqlite3'
+rescue LoadError => e
+  puts "Cannot load sqlite3 module. Local lookup WILL FAIL !"
+  puts e
+end
 
 class Database
   attr_accessor :db
