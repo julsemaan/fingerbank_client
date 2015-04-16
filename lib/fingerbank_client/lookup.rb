@@ -34,7 +34,7 @@ class Fingerbank
       return nil unless data
       name = data['device']['name']
       parents = data['device']['parents'].map{|parent| parent['name']}
-      return Device.new(:name => name, :parents => parents)
+      return Device.new(:name => name, :parents => parents, :version => data['version'])
     end
   end
 end

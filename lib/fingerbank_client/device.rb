@@ -40,6 +40,7 @@ class Device
   def initialize(options = {})
     self.name = options[:name]
     self.parents = options[:parents]
+    self.version = options[:version]
   end
 
   def has_parent?(name)
