@@ -34,7 +34,7 @@ class Device
         parent_id = record[1]
       end
 
-      Device.new(:name => name, :parents => parents)
+      Device.new(:name => name, :parents => parents, :version => version)
   end
 
   def initialize(options = {})
