@@ -17,8 +17,9 @@ class Fingerbank
 end
 
 class FingerbankClient < Fingerbank
-  def initialize
-    options = {:key => ENV['fingerbank_key']}
+  def initialize(options = {})
+    # we let the user override the key from the environment
+    options[:key] = options[:key] || ENV['fingerbank_key']
     super(options) 
   end
 end
