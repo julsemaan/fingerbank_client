@@ -2,9 +2,9 @@
 
 ## Installation
 
-First of all, make sure you login on https://fingerbank.inverse.ca/login and grab your key from your profile page. In this documentation the key will be '1234567890'
+First of all, register on https://fingerbank.inverse.ca/users/register and grab your key from your profile page. In this documentation the key will be '1234567890'
 
-Next install the gem directly or through Bundler
+Next install the gem 
 
     gem install fingerbank_client
 
@@ -12,21 +12,19 @@ Next install the gem directly or through Bundler
 
 If you are using Ruby on Rails or don't want to configure your key directly in your application, add your key to your environement.
 
-NOTE: If you are using Ruby on Rails, you need to setup your key in a way that it's available in `ENV['fingerbank_key']`
-
     export fingerbank_key=1234567890
 
 You can also pass your key while instantiating the FingerbankClient
 
-
     fingerbank_client = FingerbankClient.new(:key => "1234567890")
 
+NOTE: If you are using Ruby on Rails, you *ABSOLUTELY* have to configure it in a way that it's available in `ENV['fingerbank_key']`
 
 ### Detection with a local database
 
-CAUTION: Heroku does not support the SQLite3 which the local database uses. There is unfortunatly no way to go around that so Heroku based app cannot use the local database
+CAUTION: Heroku does not support the sqlite3 gem which the local database uses. There is unfortunatly no way to go around that so Heroku based app cannot use the local database.
 
-In order to make the detection of the devices faster and prevent the cost of interogating the Fingerbank public API, you can do a daily download of the Fingerbank database and the library will use it before calling the Fingerbank API. This will make your application faster. In the event that there's no hit in the local database, the library will still interrogate the Fingerbank API.
+In order to make the detection of the devices faster and prevent the cost of interrogating the Fingerbank public API, you can do a daily download of the Fingerbank database and the library will use it before calling the Fingerbank API. This will make your application faster. In the event that there's no hit in the local database, the library will still interrogate the Fingerbank API.
 
 Also, the Fingerbank API offers a maximum of 300 requests per hour so using the local database is suggested in a mid-size to large size application.
 
@@ -36,20 +34,24 @@ Then run the following command :
 
     rake fingerbank:update
 
-We also suggest you install this in a crontab or other job manager so it updates the database nightly. The new Fingerbank database is released at 2AM Eastern time.
+We also suggest you install this in a crontab or other job manager so it updates the database nightly. The new Fingerbank database is released everyday at 2AM Eastern time.
 
 ## Usage
 
-If you are using Ruby on Rails, then you will have access to the current device computed by Fingerbank by calling `current_device`. For example : 
+If you are using Ruby on Rails, then you will have access to the current device computed by Fingerbank by calling `current_device` in your controllers. 
 
-    current_device.name
+For example : 
+
+    def index
+      current_device.name
+    end
 
 You also have access to the Fingerbank client, though `fingerbank_client`
 
 If you are using the library outside of Ruby on Rails, then the following code will allow you to obtain the result of `current_device`.
 
     fingerbank_client = FingerbankClient.new(:key => "1234567890")
-    current_device = fingerbank_client.lookup("Some user agent")
+    current_device = fingerbank_client.lookup(:user_agent => "Some user agent")
 
 Here are the most interesting methods for a device
 
