@@ -19,7 +19,7 @@ NOTE: If you are using Ruby on Rails, you need to setup your key in a way that i
 You can also pass your key while instantiating the FingerbankClient
 
 
-    fingerbank_client = FingerbankClient.new(:key => 1234567890)
+    fingerbank_client = FingerbankClient.new(:key => "1234567890")
 
 
 ### Detection with a local database
@@ -38,17 +38,13 @@ Then run the following command :
 
 We also suggest you install this in a crontab or other job manager so it updates the database nightly. The new Fingerbank database is released at 2AM Eastern time.
 
-An example using cron
-
-    0 2 * * * /bin/bash --login -c "cd /path/to/your/app && bundle exec rake fingerbank:update"
-
 ## Usage
 
 If you are using Ruby on Rails, then you will have access to the current device computed by Fingerbank by calling `current_device`. For example : 
 
     current_device.name
 
-You also have access to the Fingerbank client, though fingerbank\_client
+You also have access to the Fingerbank client, though `fingerbank_client`
 
 If you are using the library outside of Ruby on Rails, then the following code will allow you to obtain the result of `current_device`.
 

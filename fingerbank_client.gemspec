@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://fingerbank.org"
   s.summary     = "Provides an interface to query Fingerbank with user agents."
   s.description = "Add longer description."
+  s.licence     = "GNU"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
