@@ -8,7 +8,8 @@ class Device
   attr_accessor :name
   attr_accessor :version
 
-  def self.lookup_in_local(user_agent)
+  def self.lookup_in_local(info)
+    user_agent = info[:user_agent]
     db = Database.new
 
       rs = db.query "SELECT id from user_agent where value=?", user_agent

@@ -2,23 +2,25 @@ require 'fingerbank_client/device'
 
 class Fingerbank
   module Lookup
-    def _lookup(user_agent)
+    def _lookup(info)
+      user_agent = info[:user_agent]
       begin
-        device = Device.lookup_in_local(user_agent)
+        device = Device.lookup_in_local(info)
         return device unless device.nil?
       rescue Exception => e
         Fingerbank.logger.warn "Fingerbank : Can't lookup device in local database (#{e.message})"
       end
 
-      device = lookup_in_upstream user_agent
+      device = lookup_in_upstream info 
       return device
     end
 
-    def lookup(user_agent)
+    def lookup(info)
+      user_agent = info[:user_agent]
       begin
         if defined?(Rails)
           Rails.cache.fetch(user_agent, :expires_in => 2.hour) do
-            _lookup(user_agent)
+            _lookup(info)
           end
         end
       rescue NameError => e
@@ -26,10 +28,11 @@ class Fingerbank
           raise e
         end
       end
-      return _lookup(user_agent)
+      return _lookup(info)
     end
 
-    def lookup_in_upstream(user_agent)
+    def lookup_in_upstream(info)
+      user_agent = info[:user_agent]
       data = self.interrogate(user_agent)
       return nil unless data
       name = data['device']['name']
