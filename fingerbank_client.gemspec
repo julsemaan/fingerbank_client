@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = FingerbankClient::VERSION
   s.authors     = ["Julien Semaan"]
   s.email       = ["jul.semaan@gmail.com"]
-  s.homepage    = "https://fingerbank.org"
+  s.homepage    = "http://fingerbank.org"
   s.summary     = "Provides an interface to query Fingerbank with user agents."
   s.description = "Add longer description."
   s.license     = "GNU"
