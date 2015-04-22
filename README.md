@@ -1,4 +1,9 @@
-# FingerbankClient
+# Fingerbank client (fingerbank\_client)
+
+## About
+
+The Fingerbank client is a ruby client that can accuratly determine what kind of device is using your application based on the client user agent.
+It uses the data collected by the Fingerbank project and it's public API to allow the discovery of more than 5000 devices including detailed information of most of the Android devices.
 
 ## Installation
 
