@@ -1,5 +1,7 @@
 # Fingerbank client (fingerbank\_client)
 
+[![Build Status](https://travis-ci.org/julsemaan/fingerbank_client.svg)](https://travis-ci.org/julsemaan/fingerbank_client)
+
 ## About
 
 The Fingerbank client is a ruby client that can accuratly determine what kind of device is using your application based on the client user agent.
