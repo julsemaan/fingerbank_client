@@ -25,11 +25,11 @@ You can also pass your key while instantiating the FingerbankClient
 
     fingerbank_client = FingerbankClient.new(:key => "1234567890")
 
-NOTE: If you are using Ruby on Rails, you *ABSOLUTELY* have to configure it in a way that it's available in `ENV['fingerbank_key']`
+> NOTE : If you are using Ruby on Rails, you *ABSOLUTELY* have to configure it in a way that it's available in `ENV['fingerbank_key']`
 
 ### Detection with a local database
 
-CAUTION: Heroku does not support the sqlite3 gem which the local database uses. There is unfortunatly no way to go around that so Heroku based app cannot use the local database.
+> CAUTION : Heroku does not support the sqlite3 gem which the local database uses. There is unfortunatly no way to go around that so Heroku based app cannot use the local database.
 
 In order to make the detection of the devices faster and prevent the cost of interrogating the Fingerbank public API, you can do a daily download of the Fingerbank database and the library will use it before calling the Fingerbank API. This will make your application faster. In the event that there's no hit in the local database, the library will still interrogate the Fingerbank API.
 
